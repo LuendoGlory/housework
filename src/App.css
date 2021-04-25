@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Anton|Bangers|Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
+
+:root {
+  --white-color: #ffffff;
+  --light-grey-color: #EAE8E8;
+  --light-green-color: #1ecc78;
+  --green-color: #0cb765;
+  --red-color: #EB1D27;
+  --blue-color: #4f78a4;
+  --dark-red-color: #d31017;
+  --dark-grey-color: #363636;
+  --dark-grey: #ccc;
+  --black-color: #333030;
+  --deep-black-color: #000000;
+  --soft-dark: #5E5E5E;
+
+}
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .logo{
+    
+    font-family: 'Luckiest Guy', cursive;
+
+  }
+
+
+  /* ---------------------------------- CSS Header ------------------------------ */ 
+  header {
+    display: flex;
+    background-color: var(--soft-dark);
+    justify-content: center;
+  
+  }
+  .banner-container {
+    padding: 20px 0;
+    flex-basis: 80%;
+  }
+
+  nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /*align-self: baseline;*/
+    align-items: baseline;
+
+    
+  }
+
+  nav a{
+    color:var(--white-color);
+    padding: 10px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    list-style-type: none;
+    /*background-color: var(--dark-red-color);*/
+    font-size: 18px;
+    
+   
+  }
+  nav ul a:hover{
+    color: var(--white-color);
+    text-decoration: none;
+
+  }
+  nav .connexion1{
+    border-radius: 12px;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 100px;
+    border:none;
+    color: var(--red-color);
+    background-color: var(--dark-grey-color);
+    
+  
+  }
+  nav .connexion1:hover{
+
+    background-color: var(--dark-grey-color);
+    border: 2px solid var(--green-color);
+  }
+
+
+
+  /* -------------------------------------CSS main--------------------------------*/*
+  main{
+    flex-grow: 1;
+  }
+
+  .welcomePage {
+    background-image: url(images/Cook.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: space-between;
+    height: 600px;
+    
+  }
+
+  .leftBox {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 35%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-right: 40%;
+    margin-top: 25%;
+    justify-content: flex-start;
+    margin-left: 35%;
+    margin-top: 250px;
+    padding: 30px;
+    
+    
+  }
+  .leftBox .sipleTitle{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .btn-welcome {
+    color: var(--white-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    background-color: var(--green-color);
+    font-weight: normal;
+    font-size: 19px;
+    width: 350px;
+    text-align: center;
+  }
+
+  .btn-welcome:hover {
+    color: var(--white-color);
+    background-color: var(--dark-grey-color);
+    text-decoration: none;
+  }
+
+  /* -------------------------------------CSS footer--------------------------------*/
+  footer{
+    background-color: var(--soft-dark);
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-container {
+    padding: 20px 0;
+    padding: 20px 0;
+    flex: 0 1 80%;
+  }
+  
+  .footer-container p {
+    color: var(--white-color);
+    line-height: 19px;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  /* -------------------------------------CSS Wrapper--------------------------------*/
+  .wrapper{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+/* ---------------------------------- CSS Login signup Forget password ------------------------------ */ 
+.signUpLoginBox {
+  background-repeat: repeat;
+  -webkit-box-shadow: inset 0px 143px 108px -18px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: inset 0px 143px 108px -18px rgba(0, 0, 0, 0.39);
+  box-shadow: inset 0px 143px 108px -18px rgba(0, 0, 0, 0.39);
+  display: flex;
+  justify-content: center;
+}
+
+.slContainer {
+  flex: 0 1 80%;
+  display: flex;
+}
+
+
+/* composant Welcome et */
+.quiz-bg {
+  margin: 0;
+  padding: 0;
+  background-color: var(--white-color);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: var(--white-color);
+  padding: 30px;
+  flex: 0 1 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+/* ***********************wrapperAdmon ************************** */
+.wrapperAdmin{
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.navbaradmin{
+  background-color: var(--blue-color);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.adminBloc{
+  background-color: #060b26;
+  height: 100px;
+  color: white;
+}
+
+
+
+/* ***********************Signup ************************** */
+.formSignup {
+ 
+ background: url(images/Baby-sitter.jpg);
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.formSignup h2 {
+  margin: 0 0 40px 0;
+  padding: 0;
+  color: var(--blue-color);
+  font-size: 25PX;
+}
+.formSignup form{
+  background-color: var(--white-color);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 100px;
+  border-radius: 15px;
+  max-width:600px;
+}
+
+form input{
+  display: flex;
+  padding: 5px;
+  width: 380px;
+  border-radius: 5px;
+  justify-content: center;
+  background-color: #F2F2F2;
+  outline: none;
+  border: none
+}
+
+ form .linkLogin{
+  margin-top: 15px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+}
+
+form button{
+  background: var(--green-color);
+  width: 200px;
+  padding: 10px;
+  margin: 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+
+}
+form button:hover{
+background-color: var(--dark-grey-color);
+
+}
+
+button:disabled,
+button[disabled],
+button:disabled:hover,
+button[disabled]:hover {
+  border: 1px solid var(--light-grey-color);
+  background-color: var(--light-grey-color);
+  color: var(--dark-grey-color);
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+  /* ------------------------ LogOut----------------------*/
+  .logoutContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    margin-top: -75px;
+    margin-right: -90px;
+
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--light-grey-color);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked+.slider {
+    background-color: var(--red-color);
+  }
+  
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  /* END LOGOUT SWITCH */
+
+
+  /***************************** LOADER *************************/
+.loader {
+  border: 10px solid var(--light-grey-color);
+  border-radius: 50%;
+  border-top: 10px solid var(--dark-red-color);
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  margin: 40px auto 20px;
+}
+
+.loaderText {
+  text-align: center;
+  color: var(--dark-red-color);
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* END LOADER */
+
+
+  /* ------------------------ Gestion des erreurs----------------------*/
+
+  span{
+    color: var(--dark-red-color);
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .succesMsg{
+    color: var(--green-color);
+    text-align: center;
+    font-size: 15px;
+  }
+
+
+  
+
+
+/* ---------------------------------admp CSS & MENU VERTICAL */
+.sideBar{
+  height: 500px;
+  width: 250px;
+  background-color: #2f4050;
+}
+.sideBarList{
+  height: auto;
+  padding: 0px;
+  width: 100%;
+
+}
+.sideBarList .row{
+ width: 100%;
+ height: 60px;
+ list-style-type: none;
+ margin: 0%;
+ display: flex;
+ color: white;
+ justify-content: center;
+ align-items: center;
+
+}
+.sideBarList .row:hover{
+  cursor: pointer;
+  background-color: #293846;
+}
+.sideBarList #active{
+  background-color: #293846;
+}
+
+.row #icon{
+   flex: 30%; 
+   display: grid;
+   place-items: center;
+}
+.row #title{
+   flex: 70%;  
+}
+
+
+
+/* ------------ section cards SERVICES ---------*/
+.boxs_services p{
+  text-align: center;
+}
+
+.section-one{
+  margin-top: 20px;
+  padding: 20px;
+
+}
+
+.card{
+  background-image: url(images/people_PNG.png);
+  background-color: var(--white-color);
+  border-radius: 7px;
+  box-shadow: 0 0 23px var(--dark-grey);
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  background-color: #293846;
+  color: white;
+  
+}
+.card:hover{
+  background-color: #294968;
+}
+
+
+.card-header{
+  background-color: var(--soft-dark);
+  border-radius: 7px 7px 0 0;
+  padding: 15px;
+  background-color: #293846;
+  text-align: center;
+  
+
+}
+
+.card-body{
+  padding: 15px;
+  
+}
+.card-footer{
+  background-color: var(--dark-grey-color);
+  border-radius: 0 0 7px 7px ;
+  padding: 15px;
+  color: var(--white-color);
+  text-align: center;
+  
+}
+.card-footer:hover{
+  background-color: #32495e
+}
+
+.section-two{
+  /*background-color: blue;*/
+  display: flex;
+  flex-direction: column;
+}
+.section-two > div{
+  background: var(--dark-orange);
+  padding: 15px;
+  color: var(--white-color);
+  text-align: center;
+  cursor: pointer;
+}
+
+.section-two > div:hover{
+  background-color: var(--soft-dark);
+}
+
+.selected{
+  flex-basis: 200px;
+}
+
+.cardLink .card-footer{
+  font-size: 18px;
+  text-decoration: none;
+}
+
+
+
+/* PARTIE MEDIA QUERY POUR LA PARTIE DESKTOP */
+
+@media screen and (min-width: 800px) {
+  /* header */ 
+
+  nav ul{
+    display: flex;
+  }
+
+  /* vertical menu */
+
+
+ /*CARD*/
+ .section-one{
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 0; 
+  
+}
+.card{
+  margin: 0;
+  flex-basis: 32%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  flex-wrap: wrap;
+  
+  
+}
+.card-body{
+  flex-grow: 1;
+}
+}
+
+
+@media all and (max-width: 850px) {
+  .welcomePage {
+    background-image: none;
+    flex-direction: column;
+    height: 300px;
+    justify-content: center;
+  }
+
+
+  .leftBox {
+    margin-left: 25%;
+    margin-top: 0px;
+    padding: 5px;
+    width: 250px;
+  }
+
+  .leftBox .sipleTitle{
+    font-size: 12px;
+
+  }
+
+  .btn-welcome {
+    font-size: 15px;
+    width: 250px;
+    text-align: center;
+  }  
+
+}
