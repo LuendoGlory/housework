@@ -7,14 +7,18 @@ const Leanding = () => {
     return (
         
         <main className="welcomePage">
+            <h3>HOUSEWORK BUJUMBURA</h3>
+            <p>Housework est un nouveau plateformes des services ménagés dans la ville  <br/>
+            de Bujumbura aux entreprises, aux ménages et aux expatriers.</p>
+            <p>Nous avons plusieurs services à votre disposition dont:
+            le Babysiting<br /> Jardinierie, Domestique, chefs cuisinier, Santinel, coursiers et piscinistes
+            </p>
+            <p>Cliquer sur COMMENCER pour vous connecter si vous avez déja un compte<br /> 
+            Housework, si non vous allez créer un</p>
+            <p>Si vous êtes déjà connécté, cliquez directement sur le menu services en haut </p>
+            <Link className="btn-welcome" to="/login">COMMENCER</Link>
             
             <div className="leftBox">
-            <Link className="btn-welcome" to="/login">COMMENCER</Link>
-            <p className="sipleTitle">Cliquez sur <strong>COMMENCER</strong> pour trouver vos employés
-            de services de ménage en sécurité. HOUSEWORK vous facilite la vie en trouvant des solutions
-            direct et efficace en quelques minutes seulement, nous vous offrons plusieurs services comme:
-            jardinièrie, babbysiting, des coursiers, un services de cleaning de vos appartements ou entreprises,
-            des domestiques bien formés </p>
             </div>
 
          

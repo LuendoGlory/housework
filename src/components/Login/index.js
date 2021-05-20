@@ -18,14 +18,45 @@ const Login = (props) => {
         firebase.loginUser(email, password)
         
         .then(user=>{
+
+
             setEmail('');
             setPassword('');
-            if (email==="admin01@gmail.com" || password==="01admin") {
-                props.history.push("/admin");
-            }else{
-              props.history.push("/welcome");
-            }
+           let userGotten= firebase.getCurrentUser(user.user.email)
+       
+           firebase.db.collection("users").where("email", "==", email)
+           .get()
+           .then((querySnapshot) => {
+                let datas=null
+               querySnapshot.forEach((doc) => {  
+                 console.log(doc.data())
+                    datas=doc.data()
+               });
+               if (datas.role === "admin") {
+                   return props.history.push('/admin')
+                }else 
+                return props.history.push('/welcome')
+
+               
+           })
+
+
+
+
+
+        //    if (userGotten) {
+        //     console.log(userGotten)
+        //         // if (userGotten[0].role === "user") {
+                    
+        //         //   return  props.history.push("/welcome")
+        //         // }else {
+
+        //         //     props.history.push("/admin")
+        //         // }
+             
+        //     }
             
+   
         })
         .catch(error=>{
             setError(error);

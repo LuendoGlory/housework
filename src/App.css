@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Anton|Bangers|Carter+One&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
 :root {
   --white-color: #ffffff;
   --light-grey-color: #EAE8E8;
@@ -99,6 +99,25 @@
   main{
     flex-grow: 1;
   }
+  .welcomePage h3{
+    margin-left: 80px;
+    margin-top: 30px;
+    color: var(--green-color);
+    font-size: 35px;
+    font-family: 'Aclonica', sans-serif;
+  }
+  .welcomePage p{
+    margin-left: 80px;
+    margin-top: 0px;
+    color: var(--white-color)
+  }
+  .welcomePage .btn-welcome{
+    position: relative;
+    margin-left: 400px;
+    margin-top: 5px;
+    width: 180px;
+
+  }
 
   .welcomePage {
     background-image: url(images/Cook.jpg);
@@ -107,10 +126,12 @@
     display: flex;
     justify-content: space-between;
     height: 600px;
+    flex-direction: column;
     
   }
 
   .leftBox {
+    /*background-color: #11e011;*/
     display: flex;
     flex-direction: column;
     flex: 0 1 35%;
@@ -430,45 +451,118 @@ button[disabled]:hover {
   
 
 
-/* ---------------------------------admp CSS & MENU VERTICAL */
-.sideBar{
+/* ---------------------------------ADMIN AND ADMINBAR CSS */
+.adminPage{
+  display: flex;
+  background-color: #060b26;
+  justify-content: center;
+}
+.adminPage h1{
+  color: var(--white-color);
+}
+
+
+
+.spaceBoxes{
   height: 500px;
-  width: 250px;
-  background-color: #2f4050;
+  margin: 30px 30px 30px 30px;
+  border: 5px solid #060b26;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.sideBarList{
-  height: auto;
-  padding: 0px;
-  width: 100%;
+.box1{
+  position: relative;
+  background-color: var(--blue-color);
+  height: 80px;
+  width: 200px;
+  text-align: center;
+  color: var(--white-color);
+  margin: 20px 20px 20px 20px;
+  padding: 10px;
 
 }
-.sideBarList .row{
- width: 100%;
- height: 60px;
- list-style-type: none;
- margin: 0%;
- display: flex;
- color: white;
- justify-content: center;
- align-items: center;
+.box2{
+  position: relative;
+  background-color: #bd5008;
+  height: 80px;
+  width: 200px;
+  text-align: center;
+  color: var(--white-color);
+  margin: 20px 20px 20px 20px;
+  padding: 10px;
+}
+.box3{
+  position: relative;
+  background-color: #11e011;
+  height: 80px;
+  width: 200px;
+  text-align: center;
+  color: var(--white-color);
+  margin: 20px 20px 20px 20px;
+  padding: 10px;
+}
+.box4{
+  position: relative;
+  background-color: #5e49d8;
+  height: 80px;
+  width: 200px;
+  text-align: center;
+  color: var(--white-color);
+  margin: 20px 20px 20px 20px;
+  padding: 10px;
+}
+.box5{
+  position: relative;
+  background-color: #dd6cec;
+  height: 80px;
+  width: 200px;
+  text-align: center;
+  color: var(--white-color);
+  margin: 20px 20px 20px 20px;
+  padding: 10px;
+}
 
-}
-.sideBarList .row:hover{
-  cursor: pointer;
-  background-color: #293846;
-}
-.sideBarList #active{
-  background-color: #293846;
+.spaceBoxes a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
 }
 
-.row #icon{
-   flex: 30%; 
-   display: grid;
-   place-items: center;
-}
-.row #title{
-   flex: 70%;  
-}
+/*form ajouter emlpyé */
+
+.formAdd {
+  background-color: #060b26;
+   width: 450px;
+   padding: 20px;
+   box-sizing: border-box;
+   display: flex;
+   justify-content: flex-start;
+   margin-top: 30px;
+ }
+ .formAdd label{
+   color: white;
+   margin-top: 10px;
+ }
+ .formAdd h5{
+   color: #50e79e;
+ }
+
+ .formAdd textarea{
+  position: relative;
+  width: 380px;
+  height: 150px;
+ }
+
+ .selectServices {
+   position: relative;
+   width: 380px;
+   height: 35px;
+   border-radius: 5px;
+ }
+
+
+
 
 
 

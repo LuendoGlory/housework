@@ -36,12 +36,9 @@ const Welcome = (props) => {
         return(()=>{
             myListener();
         })
-    }, [userSession]);
+    }, [userSession, firebase, props.history]);
 
   
-   
-    
-
     return userSession === null? (
      <Fragment>
          <div className="loader"></div>
