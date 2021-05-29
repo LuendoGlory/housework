@@ -20,7 +20,7 @@ const Services = (props) => {
                                 housework et choisisez le babbyssiter qui vous
                                 convient
                         </div>
-                        <Link className="cardLink" to="babyssiteur">
+                        <Link className="cardLink" to="/services/Babyssiteur">
                             <div className="card-footer">
                                 Voir plus...
                             </div>
@@ -37,7 +37,8 @@ const Services = (props) => {
                                 vous l'envoyer chez vous à la maison par nos 
                                 formateurs. 
                         </div>
-                        <Link className="cardLink" to="domestique">
+                        {/* "Domestique","Babyssiteur","Jardinier" , "Cuisinier","Santinel" */}
+                        <Link className="cardLink" to="/services/Domestique">
                             <div className="card-footer">
                                 Voir plus...
                             </div>
@@ -55,7 +56,7 @@ const Services = (props) => {
                                 meilleurs jardinier de toutes sorte.
                         </div>
 
-                        <Link className="cardLink" to="jardinier">
+                        <Link className="cardLink" to="/services/Jardinier">
                              <div className="card-footer">
                                 Voir plus..
                               </div>
@@ -76,7 +77,7 @@ const Services = (props) => {
                                 vos restaurant et pour toutes vos activites, Housework
                                 vous propose les meilleurs chefs cuisiniers.
                         </div>
-                        <Link className="cardLink" to="cuisinier">
+                        <Link className="cardLink" to="/services/Chef_cuisinier">
                             <div className="card-footer">
                                 Voir plus..
                             </div>
@@ -93,7 +94,7 @@ const Services = (props) => {
                             préférences, notre but est de vous servir et securiser votre
                             maison.
                         </div>
-                        <Link className="cardLink" to="santinel">
+                        <Link className="cardLink" to="/services/Santinel">
                             <div className="card-footer">
                               Voir plus..
                             </div>
@@ -112,7 +113,7 @@ const Services = (props) => {
                             votre piscine.
                         </div>
 
-                        <Link className="cardLink" to="piscinisteAndcoursier">
+                        <Link className="cardLink" to="/services/piscinisteAndcoursier">
                             <div className="card-footer">
                               Voir plus..
                             </div>

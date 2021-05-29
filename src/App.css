@@ -121,6 +121,7 @@
 
   .welcomePage {
     background-image: url(images/Cook.jpg);
+    background-color: #242121;
     background-repeat: no-repeat;
     background-position: center center;
     display: flex;
@@ -282,13 +283,15 @@
 form input{
   display: flex;
   padding: 5px;
-  width: 380px;
+  width: 350px;
   border-radius: 5px;
   justify-content: center;
-  background-color: #F2F2F2;
   outline: none;
-  border: none
+  border: none;
+  background-color: rgb(190, 190, 17);
 }
+
+
 
  form .linkLogin{
   margin-top: 15px;
@@ -532,12 +535,12 @@ button[disabled]:hover {
 /*form ajouter emlpyé */
 
 .formAdd {
-  background-color: #060b26;
-   width: 450px;
+  background-color: #d3d3d3;
+   width: 1200px;
    padding: 20px;
    box-sizing: border-box;
    display: flex;
-   justify-content: flex-start;
+   justify-content: center;
    margin-top: 30px;
  }
  .formAdd label{
@@ -550,19 +553,22 @@ button[disabled]:hover {
 
  .formAdd textarea{
   position: relative;
-  width: 380px;
+  width: 800px;
   height: 150px;
+  display: flex;
+  flex-direction: column;
  }
 
  .selectServices {
    position: relative;
-   width: 380px;
+   width: 350px;
    height: 35px;
    border-radius: 5px;
+   margin-top: 5px;
+   display: flex;
+   flex-direction: column;
+   background-color: rgb(218, 217, 216);
  }
-
-
-
 
 
 
@@ -645,6 +651,189 @@ button[disabled]:hover {
   text-decoration: none;
 }
 
+
+
+
+/*-----------------------partie modal --------------------------------*/
+
+
+.modalBackground {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  flex: 0 1 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  display: flex;
+  flex-direction: column;
+}
+.modalHeader {
+  background-color: var(--dark-red-color);
+  padding: 15px;
+  color: var(--white-color);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.modalHeader h2 {
+  margin: 0;
+  color: var(--white-color);
+}
+
+.modalBody {
+  padding: 30px 10px;
+  background: var(--white-color);
+  height: 400px;
+  overflow: auto;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modalFooter {
+  background-color: var(--white-color);
+  padding: 10px;
+  color: var(--white-color);
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--light-grey-color);
+}
+
+.modalBtn {
+  background: red;
+  padding: 9px 5px;
+  width: 90px;
+  color: var(--deep-black-color);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--light-grey-color);
+  margin: 0;
+  font-size: 15px;
+}
+
+.modalBtn:hover {
+  background: var(--red-color);
+  color: var(--white-color);
+  border: 1px solid var(--light-grey-color);
+}
+/*--------------------------------CSS SECTION CART---------------------------*/
+section{
+  /*height: 100vh;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card_section{
+  margin-top: 30px;
+  background-color: rgb(226, 226, 223);
+  box-shadow: 0 0 0.9375em rgb(0, 0, 0.219);
+  width: 800px;
+  border: 4px;
+
+  display: flex;
+}
+.card_section:hover{
+  background-color: rgb(209, 209, 208);
+}
+.card_img{
+  flex: 0 0 50%;
+  position: relative;
+}
+.card_pa{
+  position: absolute;
+  top: 85%;
+  left: 50%;
+
+}
+.paragrapheName{
+  background-color: var(--white-color);
+  font-size: 13.5px;
+  font-weight: 400;
+  border-radius: 2px;
+  padding: 10px 22px;
+  box-shadow: 0 0 0.9375em rgb(0, 0, 0.219);
+  transform: translate(-50%, -50%);
+
+}
+
+.card_section img {
+  display: block;
+  width: 100%;
+}
+
+.card_contenu{
+  flex: 1;
+  padding: 35px 35px 25px 35px;
+  margin-top: 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.card_info{
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: auto;
+}
+.card_service{
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+.card_time{
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.card_prix{
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.card_button{
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_button .card_btn{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: royalblue;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+
+  transition: border-bottom .4s;
+}
+.card_btn:hover{
+  border-bottom: 1px solid royalblue;
+
+}
+.card_btn:not(:last-child ){
+  margin-right: 10px;
+}
 
 
 /* PARTIE MEDIA QUERY POUR LA PARTIE DESKTOP */

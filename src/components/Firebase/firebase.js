@@ -59,6 +59,7 @@ class Firebase{
      passwordReset = email => this.auth.sendPasswordResetEmail(email);
      // fonction collection des utilisateur
      user=uid=>this.db.doc(`users/${uid}`);
+     employesMenages=(uid)=>this.db.doc(`employesMenages/${uid}`);
 
     //collection des personnels de menages
   

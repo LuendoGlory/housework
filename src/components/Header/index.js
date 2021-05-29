@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link,useLocation,Switch,Route } from "react-router-dom"
+import { Link,useLocation} from "react-router-dom"
 
 const Header = () => {
     const location=useLocation()
@@ -13,8 +13,8 @@ const Header = () => {
         <div className="banner-container">
             <nav>
             
-            {location.pathname == "/admin" ||
-                 location.pathname == `/admin/users` 
+            {location.pathname === "/admin" ||
+                 location.pathname === `/admin/users` 
                 || location.pathname === `/admin/commandes` 
                 || location.pathname === `/admin/paiement`
                 || location.pathname === `/admin/employemenage`

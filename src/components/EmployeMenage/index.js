@@ -1,10 +1,14 @@
 import React, { useState, useContext,useEffect} from 'react';
+import Adress from '../Adress'
 import {FirebaseContext } from '../Firebase';
-import {uuid as V4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 
 const EmloyeMenage =()=>{
-
+     const [track, setTrack] = useState(false)
+    const [unikId, setUnikId] = useState(uuidv4())
     const menagerData={
         nom: "",
         prenom: "",
@@ -15,7 +19,8 @@ const EmloyeMenage =()=>{
         description: "",
         photo:null,
         heureService:"",
-        typeService:""
+        typeService:"",
+        
 
 
 
@@ -32,12 +37,7 @@ const EmloyeMenage =()=>{
 
   
   
-   const uploadImages=()=>{
  
-     
-   }
-
-  
   
  
     const handleChange=(e)=>{
@@ -48,9 +48,8 @@ const EmloyeMenage =()=>{
     const handleSubmit = (e)=>{
         
         e.preventDefault();
-      console.log("limag",iPhoto)
+ 
         const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description} = datasPersonnels
-       console.log(datasPersonnels)
        
        const uplaodRef=firebase.storage.ref(`photos/${iPhoto.name}`).put(iPhoto)
        uplaodRef.on("state_changed",snapShoot=>{
@@ -60,7 +59,6 @@ const EmloyeMenage =()=>{
       //     (snapShoot.bytesTransferred / snapShoot.totalBytes)/100
       //   )
       //   setProgressBar(progress)
-       console.log("image added succefully")
   
        
        },
@@ -73,23 +71,36 @@ const EmloyeMenage =()=>{
   
   
         firebase.storage.ref("photos").child(iPhoto.name).getDownloadURL().then(
-          url=>{
+          (url)=>{
+      console.log( nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description)
               
             // so we put  the whole post in firestore
-            firebase.db.collection("employesMenage").add({
-              nom:nom,
-               prenom:prenom,
-                telephone:telephone,
-                carteIdentite:carteIdentite,
-                 dateNaissance:dateNaissance,
-                  salaire:salaire,
-                  heureService:heureService,
-                  photo:url, 
-                  description:description
-                
-             }
-  
-            )
+            
+          return(
+            firebase.db.collection('employesMenages').doc(unikId).set({
+                uuid:unikId,
+                 nom:nom,
+                  prenom:prenom,
+
+                   carteIdentite:carteIdentite,
+                    dateNaissance:dateNaissance,
+                     salaire:salaire,
+                     typeService:typeService,
+                     heureService:heureService,
+                     photo:url, 
+                     description:description,
+                     adresse:""
+                   
+                   
+                }
+     
+               ).then(result => {
+                   setTrack(!track)
+               })
+               .catch(err=>console.error(err.message))
+          )
+          
+        
           }
   
         )
@@ -103,6 +114,9 @@ const EmloyeMenage =()=>{
     const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire, description, photo, heureService,typeService,carteNational} = datasPersonnels 
 // affichage des rendus de ma page dans JSX en dessous
     return (
+
+        <>
+        {!track && 
         <div className="signUpLoginBox">
             <div className="slContainer">
 
@@ -135,13 +149,13 @@ const EmloyeMenage =()=>{
                                 <input onChange={handleChange} value={dateNaissance}  type="date" id="dateNaissance"  />
                             </div>
                             <div className="inputBox">
-                                <label htmlFor="text">Temps de service</label>
+                                <label htmlFor="text">Temps Service</label>
 
                                <select className="selectServices" onChange={handleChange} id="heureService" value={heureService} >
-                                    <option value="partiel">Temps partiel</option>
-                                    <option value="journee">Journée</option>
-                                    <option value="heure"> Par Heure</option>
-                                    <option value="commande">Par commande</option>
+                                    <option value="Temps_partiel">Temps partiel</option>
+                                    <option value="Pournalier">Journée</option>
+                                    <option value="Heure"> Par Heure</option>
+                                    <option value="Commande">Par commande</option>
 
                                </select>
                             </div>
@@ -150,13 +164,13 @@ const EmloyeMenage =()=>{
 
                                <select onChange={handleChange} id="typeService" value={typeService}
                                      type="text" className="selectServices">
-                                    <option value="staBabyssiteurte">Babyssiteur</option>
-                                    <option value="domestique">Domestique</option>
+                                    <option value="Babyssiteurte">Babyssiteur</option>
+                                    <option value="Domestique">Domestique</option>
                                     <option value="Jardinier">Jardinier</option>
-                                    <option value="chef_cuisinier">Chef cuisinier</option>
+                                    <option value="Chef_cuisinier">Chef cuisinier</option>
                                     <option value="Santinel">Santinel</option>
-                                    <option value="coursier">Coursier</option>
-                                    <option value="pisciniste">Pisciniste</option>
+                                    <option value="Coursier">Coursier</option>
+                                    <option value="Pisciniste">Pisciniste</option>
 
                                </select>
                                {services}
@@ -187,13 +201,17 @@ const EmloyeMenage =()=>{
                                 </textarea>
                             </div>
 
-                            <button>Enregistrer</button>
+                            <button type='submit'>Enregistrer</button>
                         </form>
                    </div>
 
                </div>
             </div>
-            
+            }
+            {track && <Adress id={unikId} champ="employesMenages" />}
+
+        </>
+        
     );
 };
 
