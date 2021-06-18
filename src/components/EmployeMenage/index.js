@@ -33,12 +33,7 @@ const EmloyeMenage =()=>{
     ] = useState(null)
 
     const firebase = useContext(FirebaseContext);
-  
 
-  
-  
- 
-  
  
     const handleChange=(e)=>{
         setDatasPersonnels({...datasPersonnels, [e.target.id]: e.target.value });
@@ -53,14 +48,7 @@ const EmloyeMenage =()=>{
        
        const uplaodRef=firebase.storage.ref(`photos/${iPhoto.name}`).put(iPhoto)
        uplaodRef.on("state_changed",snapShoot=>{
-        //  then here we can update progressBar variable
-  
-      //   const progress=Math.round(
-      //     (snapShoot.bytesTransferred / snapShoot.totalBytes)/100
-      //   )
-      //   setProgressBar(progress)
-  
-       
+    
        },
       //  here i catch error and  as is not a friendly message i 
       // console it hahah lol
@@ -81,7 +69,6 @@ const EmloyeMenage =()=>{
                 uuid:unikId,
                  nom:nom,
                   prenom:prenom,
-
                    carteIdentite:carteIdentite,
                     dateNaissance:dateNaissance,
                      salaire:salaire,
@@ -177,7 +164,7 @@ const EmloyeMenage =()=>{
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="salaire">Salaire</label>
-                                <input onChange={handleChange} value={salaire} type="text"  id="salaire" required autoComplete="off" />
+                                <input onChange={handleChange} value={salaire} type="number" step="any"  id="salaire" required autoComplete="off" />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="photo">Photo</label>

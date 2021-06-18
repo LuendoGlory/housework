@@ -5,14 +5,14 @@ import Users from "../Users";
 import EmployeMenage from "../EmployeMenage";
 import Paiement from "../Paiement";
 import Commandes from "../commande";
-import Employes from "../PersonnelsHousework";
+import ClientsPhysique from "../ClientsPhysique";
 
 
 export default function Pages(props) {
   const choice = props.match.params.page;
   console.log("those are choices",choice)
 
-  const form = ["users", "paiement", "employemenage","commandes","employes"];
+  const form = ["users", "paiement", "employemenage","commandes","clientsPhysique"];
   return (
     <div>
       {!form.includes(choice) && <ErrorPage />}
@@ -20,7 +20,7 @@ export default function Pages(props) {
       {choice === "paiement" && <Paiement />}
       {choice === "employemenage" && <EmployeMenage />}
       {choice === "commandes" && <Commandes/>}
-      {choice === "employes" && <Employes/>}
+      {choice === "clientsPhysique" && <ClientsPhysique/>}
     </div>
   );
 }

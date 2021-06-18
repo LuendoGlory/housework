@@ -29,9 +29,15 @@ class Firebase{
     signupUser=(email, password)=>
      this.auth.createUserWithEmailAndPassword(email, password);
     
-
+    //get a specific adress
+    getAdress=(id)=>{
+  return this.db.collection("adresse").doc(id).get().then(doc=>{
+    // console.log(doc.id, " => ", doc.data());
+    return doc
+   })
+    }
     //Fonction de connexion
-
+     
     loginUser=(email, password) =>
      this.auth.signInWithEmailAndPassword(email, password);
 

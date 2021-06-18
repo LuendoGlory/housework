@@ -3,7 +3,7 @@ import { Link,useLocation} from "react-router-dom"
 
 const Header = () => {
     const location=useLocation()
-    const form = ["users", "paiement", "employemenage","commandes","employes"];
+    const form = ["users", "paiement", "employemenage","commandes","clientsPhysique"];
     return (
        
       <>
@@ -16,9 +16,8 @@ const Header = () => {
             {location.pathname === "/admin" ||
                  location.pathname === `/admin/users` 
                 || location.pathname === `/admin/commandes` 
-                || location.pathname === `/admin/paiement`
                 || location.pathname === `/admin/employemenage`
-                || location.pathname === `/admin/employes`
+                || location.pathname === `/admin/clientsPhysique`
 
             ?(
 
@@ -28,8 +27,7 @@ const Header = () => {
                 <li><Link to="/admin/users">Utilisateurs</Link></li>
                 <li><Link to="/admin/employemenage">Personnels de menage</Link></li>
                 <li><Link to="/admin/commandes">Commandes</Link></li>
-                <li><Link to="/admin/paiement">Paiement</Link></li>
-                <li><Link to="/admin/employes">Emloyés</Link></li>
+                <li><Link to="/admin/clientsPhysique">Clients Pysique</Link></li>
             
             </ul>
             

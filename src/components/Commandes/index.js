@@ -13,11 +13,11 @@ const [currentUser, setCurrentUser] = useState()
 const [idAdress, setIdAdress] = useState("")
 const [track, setTrack] = useState(false)
 const [unikId, setUnikId] = useState(uuidv4())
+const [isUpdate,setIsUpdate]=useState("")
 console.log("this is the id and service",id,service)
 useEffect(() => {
     setCurrentUser(firebase.auth.currentUser)
 }, [id])
-currentUser && console.log(currentUser)
 // currenteUser.uid
 const dataCommandes={
     dateCommade: "",
@@ -58,23 +58,21 @@ const dataCommandes={
        });
 
      
-        // firebase.db.collection('Commandes').doc(`${unikId}`).set({
-        //     uuid:unikId,
-        //     dateCommade:dateCommade,
-        //     dateArriver:dateArriver,
-        //     exigences:exigences,
-        //     idUser:currentUser.uid,
-        //     idEmployeMenage:id,
-        //     adresse:""
-        // }).then(doc => {
+         firebase.db.collection('Commandes').doc(`${unikId}`).set({
+            uuid:unikId,
+         dateCommade:dateCommade,
+            dateArriver:dateArriver,
+           exigences:exigences,
+            idUser:currentUser.uid,
+           idEmployeMenage:id,
+         adresse:""
+        }).then(doc => {
 
-        //     setTrack(true)
-        //     console.log("this is the doc qnd id",doc)
-        //   }).catch(err => console.log("error acure ",err))
+   
+          }).catch(err => console.log("error acure ",err))
          
        }
-
-
+       
       const closeModal= ()=>{
         setOpenModal(false);
       }
@@ -88,14 +86,31 @@ const dataCommandes={
                     <form onSubmit={handleSubmit}>
                             <h2><strong> PASSER VOTRE DEMANDE </strong></h2>
 
-                            <div className="inputBox">
-                                <label htmlFor="date">Date de demande</label>
-                                <input onChange={handleChange} type="date" id="dateCommade" required />
-                            </div>
+                            <div className="blocChoise">
 
-                            <div className="inputBox">
-                                <label htmlFor="dateArriver">A quelle date tu veux votre employé de menage </label>
-                                <input onChange={handleChange} type="date" id="dateArriver" required  />
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
+
+
+
+
+
+
+                            
                             </div>
 
                             <div className="inputBox">
@@ -108,18 +123,21 @@ const dataCommandes={
                             <p>Veillez verrifier vos informations avant de confirmer votre demande d'employer de menage chez Housework</p>
 
                             <button type='submit' > Confirmer </button>
-                            <button onClick={()=>setOpenModal(!openModal)} > changer votre adresse </button>
+                            <button onClick={()=>{
+
+                                setTrack(true)
+
+                            }} > changer votre adresse </button>
                         </form>
                    </div>
 
                </div>
             </div>}
-            {track && <Adress id={unikId} champ="Commandes"/>}
+            {track && <Adress id={unikId} champ="Commandes" isUpdate={currentUser.uid}/>}
 
 
           
-
-
+            {/* -- modal pop up  */}
             <ModalConfirm showModal={openModal} closeModal={closeModal}/>
                 
         </>

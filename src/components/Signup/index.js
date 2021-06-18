@@ -1,6 +1,8 @@
 import React, {useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
 import {FirebaseContext } from '../Firebase';
+import { v4 as uuidv4 } from 'uuid';
+import Adress from '../Adress';
 
 
 const Signup = (props) => {
@@ -16,7 +18,9 @@ const Signup = (props) => {
     const [dataUser, setDataUser] = useState(myDataUser);
     const firebase = useContext(FirebaseContext);
     const [error, setError] = useState("");
-   
+    const [track, setTrack] = useState(false)
+    const [unikId, setUnikId] = useState(null)
+      
     const handleChange=e=>{
         setDataUser({ ...dataUser, [e.target.id]: e.target.value})
     }
@@ -26,15 +30,19 @@ const Signup = (props) => {
         const { email, password, prenom, role } = dataUser;
         firebase.signupUser(email, password)
         .then(authUser=>{
+            setUnikId(authUser.user.uid)
              return firebase.user(authUser.user.uid).set({
+               
                 prenom,
                 email,
-                role
+                role,
+                adresse:""
             })
         })
         .then(()=>{
             setDataUser({ ...dataUser});
-            props.history.push("/welcome")
+            setTrack(true)
+            
 
         })
         .catch((error)=>{
@@ -52,6 +60,8 @@ const errorMessage = error !== '' && <span> {error.message} </span>
 
 // affichage des rendus de ma page dans JSX en dessous
     return (
+        <>
+        {!track && 
         <div className="signUpLoginBox">
             <div className="slContainer">
 
@@ -88,7 +98,12 @@ const errorMessage = error !== '' && <span> {error.message} </span>
                    </div>
 
                </div>
-            </div>
+            </div>}
+            {track && <Adress id={unikId} champ="users"/>}
+
+        
+        </>
+        
             
     );
 };

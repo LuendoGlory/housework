@@ -1,9 +1,12 @@
-import React,{ useState, useContext } from 'react';
+import React,{ useState, useContext, useEffect } from 'react';
 import {FirebaseContext } from '../Firebase';
+import {useHistory} from "react-router-dom"
 
-const Adress = ({id,champ}) => {
-    console.log("this is id and champ",id,champ)
+const Adress = ({id,champ,isUpdate}) => {
+    console.log("id passez",isUpdate);
+const history=useHistory()
 const adressDatas = {
+    id:"",
     commune: "",
     zone: "",
     quartier: "",
@@ -11,7 +14,7 @@ const adressDatas = {
     numero: "",
     telephone: ""
 }
-
+const [getAdresse,setGetAdresse]=useState(null)
 const [datas, setDatas] = useState(adressDatas)
 const firebase = useContext(FirebaseContext)
 
@@ -19,32 +22,79 @@ const handleChange=(e)=>{
     setDatas({...datas, [e.target.id]: e.target.value });
 
 }
+useEffect(()=>{
+    if(isUpdate){
+       
+        firebase.db.collection("users").doc(isUpdate).get().then(doc=>{
+       
 
+            firebase.db.collection("adresse").doc(doc.data().adresse).get().then(doc=>{
+  
+                 setDatas({id:doc.id,...doc.data()})
+
+
+             })  
+             
+           })
+        
+    }
+},[isUpdate])
 const handleSubmit = (e)=>{
 e.preventDefault();
-const {  commune,
+const { 
+    id,
+    commune,
     zone,
     quartier,
     avenue,
     numero,
     telephone
 }=datas
-firebase.db.collection('adresse').add({
-    commune:commune , 
-    zone:zone,     
-    quartier:quartier, 
-    avenue:avenue,   
-    numero:numero,   
-    telephone:telephone
+if(isUpdate){
+    console.log("tunaingiya mu update");
+    console.log("data from ", { 
+        id,
+        commune,
+        zone,
+        quartier,
+        avenue,
+        numero,
+        telephone
+    });
+    firebase.db.collection('adresse').doc(id).set({
+        commune,
+        zone,
+        quartier,
+        avenue,
+        numero,
+        telephone
+           
+       }).then(doc => console.log("successfully updated")).catch(err=>console.log(err.message))
+}else{
 
-       
-   }).then(doc => {
 
-     firebase.db.collection(`${champ}`).doc(`${id}`).update({
-        adresse:doc.id
-     }).then(doc => console.log("document erregistre",doc)).catch(err => console.log("error acure collection ",err))
-   }).catch(err => console.log("error acure ",err))
-  
+    firebase.db.collection('adresse').add({
+        commune:commune , 
+        zone:zone,     
+        quartier:quartier, 
+        avenue:avenue,   
+        numero:numero,   
+        telephone:telephone
+    
+           
+       }).then(doc => {
+    
+         firebase.db.collection(`${champ}`).doc(`${id}`).update({
+            adresse:doc.id
+         }).then(doc => {
+             console.log("document erregistre",doc)
+            
+             history.push("/welcome")
+            }).catch(err => console.log("error acure collection ",err))
+       }).catch(err => console.log("error acure ",err))
+      
+
+}
 }
 
 
@@ -54,37 +104,37 @@ const { commune, zone, quartier, avenue, numero, telephone } = datas
         <div className="formAdd">
 
              <form onSubmit={handleSubmit}>
-                    <h5><strong>ADRESS DE L'EMPLOYE DE MENAGE</strong></h5>
+                    <h5><strong>{isUpdate?"Mettre a jour l'adresse":"Ajout d'adresse"}</strong></h5>
 
                      <div className="inputBox">
                                 <label htmlFor="commune">Commune</label>
-                                <input onChange={handleChange}   type="text" id="commune" required />
+                                <input onChange={handleChange} value={commune}   type="text" id="commune" required />
                             </div>
 
                             <div className="inputBox">
                                 <label htmlFor="zone">Zone</label>
-                                <input onChange={handleChange}   type="text" id="zone" required  />
+                                <input onChange={handleChange} value={zone}   type="text" id="zone" required  />
                             </div>
 
                             <div className="inputBox">
                                 <label htmlFor="text">Quartier</label>
-                                <input onChange={handleChange}   type="tel"  id="quartier"  />
+                                <input onChange={handleChange} value={quartier}   type="tel"  id="quartier"  />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Avenue</label>
-                                <input onChange={handleChange}    type="text"  id="avenue"  />
+                                <input onChange={handleChange} value={avenue}    type="text"  id="avenue"  />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Numéro</label>
-                                <input onChange={handleChange}   type="text"  id="numero"  />
+                                <input onChange={handleChange} value={numero}   type="number" step="any"  id="numero"  />
                             </div>
 
                             <div className="inputBox">
                                 <label htmlFor="text">Télphone</label>
-                                <input onChange={handleChange}    type="tel" id="telephone" />
+                                <input onChange={handleChange} value={telephone}  type="tel" id="telephone" />
                             </div>
 
-                            <button type='submit'>Enregistrer</button>
+                            <button type='submit'>{isUpdate?"confirmez":"validez"}</button>
                         </form>
         </div>
     );

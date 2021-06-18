@@ -5,17 +5,19 @@ import Header from './components/Header';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Signup from './components/Signup';
+
+
 import ForgetPassword from './components/ForgetPassword';
 import Utilisation from './components/Utilisation';
-
 import Contact from './components/Contact';
-
 import PiscinisteAndcoursier from './components/PiscinisteAndcoursier';
 import Leanding from './components/Leanding';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
 import Section from './components/SectionEmployers';
 import Commandes from './components/Commandes';
+import Tables from './components/Tables';
+//import ClientsPhysique from './components/ClientsPhysique';
 import ErrorPage from './components/ErrorPage'
 
 
@@ -28,6 +30,7 @@ function App() {
 
  
   return (
+    <>
     <Router>
       <Header />
       <Switch>
@@ -42,6 +45,8 @@ function App() {
       <Route exact path="/section" component={Section} />
       <Route exact path="/piscinisteAndcoursier" component={PiscinisteAndcoursier} />
       <Route exact path="/admin" component= {Admin} />
+      <Route exact path="/tables" component= {Tables} />
+      {/*<Route exact path="/clientsPhysique" component= {ClientsPhysique} />*/}
       {/* <Route path="/admin/users" component= {Users} /> */}
       <Route exact path="/admin/:page" component= {Pages} />
      <Route exact path="/commandes/:service/:id" component= {Commandes} />
@@ -53,6 +58,7 @@ function App() {
    <Footer />
 </Router>   
 
+    </>
   );
 }
 
