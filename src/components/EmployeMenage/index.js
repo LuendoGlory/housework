@@ -20,6 +20,7 @@ const EmloyeMenage =()=>{
         photo:null,
         heureService:"",
         typeService:"",
+        genre: ""
         
 
 
@@ -44,7 +45,7 @@ const EmloyeMenage =()=>{
         
         e.preventDefault();
  
-        const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description} = datasPersonnels
+        const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description, genre} = datasPersonnels
        
        const uplaodRef=firebase.storage.ref(`photos/${iPhoto.name}`).put(iPhoto)
        uplaodRef.on("state_changed",snapShoot=>{
@@ -60,7 +61,7 @@ const EmloyeMenage =()=>{
   
         firebase.storage.ref("photos").child(iPhoto.name).getDownloadURL().then(
           (url)=>{
-      console.log( nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description)
+      console.log( nom, prenom, telephone, carteIdentite, dateNaissance, salaire,heureService,photo, description, genre)
               
             // so we put  the whole post in firestore
             
@@ -76,7 +77,9 @@ const EmloyeMenage =()=>{
                      heureService:heureService,
                      photo:url, 
                      description:description,
-                     adresse:""
+                     adresse:"",
+                     isActive:false,
+                     genre: genre
                    
                    
                 }
@@ -98,7 +101,7 @@ const EmloyeMenage =()=>{
     }
 
 
-    const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire, description, photo, heureService,typeService,carteNational} = datasPersonnels 
+    const { nom, prenom, telephone, carteIdentite, dateNaissance, salaire, description, photo, heureService,typeService,carteNational, genre} = datasPersonnels 
 // affichage des rendus de ma page dans JSX en dessous
     return (
 
@@ -123,8 +126,14 @@ const EmloyeMenage =()=>{
                             </div>
 
                             <div className="inputBox">
-                                <label htmlFor="text">Télephone</label>
-                                <input onChange={handleChange} value={telephone}  type="tel"  id="telephone"  />
+                                <label htmlFor="text">Genre</label>
+
+                               <select className="selectServices" onChange={handleChange} id="genre" value={genre} >
+                                    <option value="m">M</option>
+                                    <option value="f">F</option>
+                                    
+
+                               </select>
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Numero de carte d'identite</label>
@@ -151,7 +160,7 @@ const EmloyeMenage =()=>{
 
                                <select onChange={handleChange} id="typeService" value={typeService}
                                      type="text" className="selectServices">
-                                    <option value="Babyssiteurte">Babyssiteur</option>
+                                    <option value="Babyssiteur">Babyssiteur</option>
                                     <option value="Domestique">Domestique</option>
                                     <option value="Jardinier">Jardinier</option>
                                     <option value="Chef_cuisinier">Chef cuisinier</option>
@@ -195,7 +204,7 @@ const EmloyeMenage =()=>{
                </div>
             </div>
             }
-            {track && <Adress id={unikId} champ="employesMenages" />}
+            {track && <Adress idChamp={unikId} champ="employesMenages" />}
 
         </>
         

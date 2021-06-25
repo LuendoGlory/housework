@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Search from './components/Recherche';
 
 
 import ForgetPassword from './components/ForgetPassword';
@@ -46,6 +47,7 @@ function App() {
       <Route exact path="/piscinisteAndcoursier" component={PiscinisteAndcoursier} />
       <Route exact path="/admin" component= {Admin} />
       <Route exact path="/tables" component= {Tables} />
+      <Route exact path="/search" component= {Search} />
       {/*<Route exact path="/clientsPhysique" component= {ClientsPhysique} />*/}
       {/* <Route path="/admin/users" component= {Users} /> */}
       <Route exact path="/admin/:page" component= {Pages} />

@@ -37,7 +37,10 @@ return(
          profession: profession,
          adresse: "" 
        
-    }).then(resultat=>{
+    }).then(doc=>{
+        
+        localStorage.setItem("client",unikId)
+         console.log("here enterring the scope",unikId);
         setTrack(!track)
         setInputClients({...clients})
 
@@ -96,7 +99,7 @@ return(
             </div>
      }
             
-    {track && <Adress id={unikId} champ="clientsPysique" />}
+    {track && <Adress idChamp={unikId} champ="clientsPysique" />}
 
  </>
 

@@ -10,7 +10,7 @@ const ContainerService = (props) => {
 const firebase = useContext(FirebaseContext);
 useEffect(()=>{
     if(service){
-      firebase.db.collection("employesMenages").where("typeService","==",service)
+      firebase.db.collection("employesMenages").where("typeService","==",service).where("isActive","==",false)
       .get()
       .then((querySnapshot) => {
        

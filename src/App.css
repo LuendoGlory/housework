@@ -835,16 +835,69 @@ section{
   margin-right: 10px;
 }
 
-/* ------------------------------------blocChoise---------------------------------  */
+/* ------------------------------------blocTables---------------------------------  */
 
-.blocChoise{
-display: flex;
+.tableau_style{
+  border-collapse: collapse;
+  min-width: 400px;
+  width: auto;
+  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
+  cursor:pointer;
+  margin: 100px auto;
+  border: 2px solid var(--green-color);
 
+}
+
+thead tr{
+  background-color: var(--green-color);
+  text-align: center;
+  color: white;
+  
+}
+th, td{
+  padding: 15px 20px;
+
+}
+
+tbody tr, td, th{
+  border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even){
+  background-color: #f5dbdb;
+}
+tbody tr td button{
+  display: flex;
+  background-color: var(--red-color);
 }
 
 
 
-/* ------------------------------------FinCSS blocChoise---------------------------------  */
+
+
+/* ------------------------------------FinCSS blc TABLEDATAS---------------------------------  */
+
+/* ------------------------------------FinCSS blc SEARCH---------------------------------  */
+
+
+.boxSearch{
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  
+
+  
+}
+
+
+.boxSearch input .inputSearch{
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+}
+/* ------------------------------------FinCSS blc SEARCH---------------------------------  */
 
 
 

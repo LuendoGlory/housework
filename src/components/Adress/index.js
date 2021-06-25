@@ -2,8 +2,9 @@ import React,{ useState, useContext, useEffect } from 'react';
 import {FirebaseContext } from '../Firebase';
 import {useHistory} from "react-router-dom"
 
-const Adress = ({id,champ,isUpdate}) => {
+const Adress = ({idChamp,champ,isUpdate}) => {
     console.log("id passez",isUpdate);
+    console.log("id passez",idChamp);
 const history=useHistory()
 const adressDatas = {
     id:"",
@@ -84,7 +85,7 @@ if(isUpdate){
            
        }).then(doc => {
     
-         firebase.db.collection(`${champ}`).doc(`${id}`).update({
+         firebase.db.collection(`${champ}`).doc(`${idChamp}`).update({
             adresse:doc.id
          }).then(doc => {
              console.log("document erregistre",doc)

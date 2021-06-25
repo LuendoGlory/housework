@@ -3,7 +3,7 @@ import {FirebaseContext } from '../Firebase';
 import Adress from '../Adress'
 import ModalConfirm from '../ModalConfirm'
 import { v4 as uuidv4 } from 'uuid';
-
+import dateformat from "dateformat"
 const Commandes = (props) => {
 
 const [openModal, setOpenModal] = useState(false)
@@ -20,12 +20,13 @@ useEffect(() => {
 }, [id])
 // currenteUser.uid
 const dataCommandes={
-    dateCommade: "",
-    dateArriver: "",
     exigences: "",
     idUser: "",
-    idAdresse: "",
-    idEmployeMenage: ""
+    idEmployeMenage: "",
+    dateArriver:""
+
+
+
 }
     const [commande, setCommande] = useState(dataCommandes);
     const firebase = useContext(FirebaseContext);
@@ -36,14 +37,17 @@ const dataCommandes={
     }
     
 
+    // FONCTION QUI ACTIVE 
+    const  valide=(id,champ)=>{
+      firebase.db.collection(`${champ}`).doc(`${id}`).update({isActive:true}).then(
+      data=>console.log("mise a jour"))}
+   
+   
+   
     const handleSubmit =(e)=>{
         
         e.preventDefault();
-        const {  
-             dateCommade,
-        dateArriver,
-        exigences,
-       }=commande
+        const {  dateArriver, exigences,date }=commande
 
        firebase.db.collection("Commandes").where("idUser", "==", currentUser.uid)
        .get()
@@ -57,27 +61,76 @@ const dataCommandes={
            console.log("Error getting documents: ", error);
        });
 
-     
-         firebase.db.collection('Commandes').doc(`${unikId}`).set({
-            uuid:unikId,
-         dateCommade:dateCommade,
-            dateArriver:dateArriver,
-           exigences:exigences,
-            idUser:currentUser.uid,
-           idEmployeMenage:id,
-         adresse:""
-        }).then(doc => {
+     if(localStorage.getItem("client")){
+
+    firebase.db.collection("employesMenages").doc(`${id}`).get().then(
+        doc=>{
+            console.log("this is the employesMenage",doc.data());
+            
+                   firebase.db.collection("Demmande_sur_place").add({
+                    dateArriver:dateArriver,
+                    exigences:exigences,
+                    idEmployeMenage:id,
+                    fraisComission : Math.ceil(parseInt(doc.data().salaire, 10)/10),
+                    idClient_sur_place:localStorage.getItem("client"),
+                    date:dateformat(new Date())
+            
+                   }).then(doc => {
+            
+                     valide(id,"employesMenages")
+                    localStorage.removeItem("client")
+                     console.log("commande physic ajouter",doc.doc)
+                   }
+                    ).catch(err=>console.log("error qcure",err.message))
+            
+        }
+      
+    )
+
+
+
+     }else{
+
+
+
+
+          
+    firebase.db.collection("employesMenages").doc(`${id}`).get().then(
+        doc=>{
+            console.log("this is the employesMenage",doc.data());
+            
+            
+                   firebase.db.collection('Commandes').doc(`${unikId}`).set({
+                      uuid:unikId,
+                      dateArriver:dateArriver,
+                     exigences:exigences,
+                      idUser:currentUser.uid,
+                    fraisComission : Math.ceil(parseInt(doc.data().salaire, 10)/10),
+                     idEmployeMenage:id,
+                     date:dateformat(new Date())
+              
+            
+                  }).then(doc => valide(id,"employesMenages")).catch(error=>console.log("error acure",error.message))
+
+            
+        }    
+      
+    )        
+
+     }
 
    
-          }).catch(err => console.log("error acure ",err))
          
        }
        
       const closeModal= ()=>{
         setOpenModal(false);
       }
+
+      const { Commandes, exigences, date}= commande
     
     return (
+
         <>
         {!track && <div className="signUpLoginBox">
             <div className="slContainer">
@@ -86,31 +139,10 @@ const dataCommandes={
                     <form onSubmit={handleSubmit}>
                             <h2><strong> PASSER VOTRE DEMANDE </strong></h2>
 
-                            <div className="blocChoise">
-
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
-
-
-
-
-
-
                             
+                            <div className="inputBox">
+                                <label htmlFor="text">Date de présentation de l'employé de menage</label>
+                                <input onChange={handleChange}   type="date" id="dateArriver"  />
                             </div>
 
                             <div className="inputBox">
@@ -139,6 +171,8 @@ const dataCommandes={
           
             {/* -- modal pop up  */}
             <ModalConfirm showModal={openModal} closeModal={closeModal}/>
+
+
                 
         </>
     );

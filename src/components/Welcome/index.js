@@ -2,6 +2,7 @@ import React, { useState, Fragment, useContext, useEffect }from 'react';
 import Services from '../Services';
 import Logout from '../Logout';
 import {FirebaseContext } from '../Firebase';
+import Search from '../Recherche';
  
 
 const Welcome = (props) => {
@@ -49,7 +50,9 @@ const Welcome = (props) => {
     <div className="quiz-bg">
     <div className="container">
      <Logout />
+     <Search/>
     <Services  userData={userData}/>
+
     </div>
     
 </div>
