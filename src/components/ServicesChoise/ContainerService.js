@@ -17,9 +17,6 @@ useEffect(()=>{
             setEmployees(querySnapshot.docs.map(doc => {return {
                 id:doc.id,
                 employe:doc.data()}} ))
-         
-        
-      
         
       })
       .catch((error) => {
