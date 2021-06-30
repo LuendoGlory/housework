@@ -2,6 +2,9 @@ import React, { useState, useContext,useEffect} from 'react';
 import Adress from '../Adress'
 import {FirebaseContext } from '../Firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 
 
@@ -85,6 +88,15 @@ const EmloyeMenage =()=>{
                 }
      
                ).then(result => {
+                toast.warn('Employé de menage enregistrer!!! il ne reste que son adresse', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false
+                    });
+                    
                    setTrack(!track)
                })
                .catch(err=>console.error(err.message))
@@ -128,7 +140,7 @@ const EmloyeMenage =()=>{
                             <div className="inputBox">
                                 <label htmlFor="text">Genre</label>
 
-                               <select className="selectServices" onChange={handleChange} id="genre" value={genre} >
+                               <select className="selectServices" onChange={handleChange} id="genre" value={genre} required >
                                     <option value="m">M</option>
                                     <option value="f">F</option>
                                     
@@ -137,17 +149,17 @@ const EmloyeMenage =()=>{
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Numero de carte d'identite</label>
-                                <input onChange={handleChange} value={carteIdentite}  type="text"  id="carteIdentite"  />
+                                <input onChange={handleChange} value={carteIdentite}  type="text"  id="carteIdentite" required />
                             </div>
 
                             <div className="inputBox">
                                 <label htmlFor="text">Date de naissance</label>
-                                <input onChange={handleChange} value={dateNaissance}  type="date" id="dateNaissance"  />
+                                <input onChange={handleChange} value={dateNaissance}  type="date" id="dateNaissance" required />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Temps Service</label>
 
-                               <select className="selectServices" onChange={handleChange} id="heureService" value={heureService} >
+                               <select className="selectServices" onChange={handleChange} id="heureService" value={heureService} required >
                                     <option value="Temps_partiel">Temps partiel</option>
                                     <option value="Pournalier">Journée</option>
                                     <option value="Heure"> Par Heure</option>
@@ -159,7 +171,7 @@ const EmloyeMenage =()=>{
                                 <label htmlFor="text">Type de service</label>
 
                                <select onChange={handleChange} id="typeService" value={typeService}
-                                     type="text" className="selectServices">
+                                     type="text" className="selectServices" required>
                                     <option value="Babyssiteur">Babyssiteur</option>
                                     <option value="Domestique">Domestique</option>
                                     <option value="Jardinier">Jardinier</option>
@@ -173,7 +185,7 @@ const EmloyeMenage =()=>{
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="salaire">Salaire</label>
-                                <input onChange={handleChange} value={salaire} type="number" step="any"  id="salaire" required autoComplete="off" />
+                                <input onChange={handleChange} value={salaire} type="number" step="any"  id="salaire" required autoComplete="off"  />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="photo">Photo</label>
@@ -192,7 +204,7 @@ const EmloyeMenage =()=>{
             
                             <div className="inputBox">
                                 <label htmlFor="text">Description</label>
-                                <textarea onChange={handleChange} value={description}  type="textarea"  id="description" placeholder="La description du profil de personnel de menage">
+                                <textarea onChange={handleChange} value={description}  type="textarea"  id="description" placeholder="La description du profil de personnel de menage" required>
                                     
                                 </textarea>
                             </div>

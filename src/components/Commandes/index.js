@@ -4,6 +4,11 @@ import Adress from '../Adress'
 import ModalConfirm from '../ModalConfirm'
 import { v4 as uuidv4 } from 'uuid';
 import dateformat from "dateformat"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
+
+
 const Commandes = (props) => {
 
 const [openModal, setOpenModal] = useState(false)
@@ -110,7 +115,22 @@ const dataCommandes={
                      date:dateformat(new Date())
               
             
-                  }).then(doc => valide(id,"employesMenages")).catch(error=>console.log("error acure",error.message))
+                  }).then(doc => {
+                    toast.success('Bravooo !!! vous avec commandé votre employé de menage. rester en ligne nous allons vous l\amener chez vous dans le délai', {
+                        position: "top-center",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+
+                   valide(id,"employesMenages")
+                   props.history.push("/welcome")
+
+
+                  }).catch(error=>console.log("error acure",error.message))
 
             
         }    
@@ -165,7 +185,7 @@ const dataCommandes={
 
                </div>
             </div>}
-            {track && <Adress id={unikId} champ="Commandes" isUpdate={currentUser.uid}/>}
+            {track && <Adress idChamp={unikId} champ="Commandes" isUpdate={currentUser.uid}/>}
 
 
           
