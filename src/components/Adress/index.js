@@ -1,6 +1,9 @@
 import React,{ useState, useContext, useEffect } from 'react';
 import {FirebaseContext } from '../Firebase';
 import {useHistory} from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 const Adress = ({idChamp,champ,isUpdate}) => {
     console.log("id passez",isUpdate);
@@ -88,6 +91,17 @@ if(isUpdate){
          firebase.db.collection(`${champ}`).doc(`${idChamp}`).update({
             adresse:doc.id
          }).then(doc => {
+
+            toast.success('Enregistrement avec succès !!!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                
+                });
+
              console.log("document erregistre",doc)
             
              history.push("/welcome")
@@ -119,20 +133,20 @@ const { commune, zone, quartier, avenue, numero, telephone } = datas
 
                             <div className="inputBox">
                                 <label htmlFor="text">Quartier</label>
-                                <input onChange={handleChange} value={quartier}   type="tel"  id="quartier"  />
+                                <input onChange={handleChange} value={quartier}   type="tel"  id="quartier" required  />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Avenue</label>
-                                <input onChange={handleChange} value={avenue}    type="text"  id="avenue"  />
+                                <input onChange={handleChange} value={avenue}    type="text"  id="avenue"  required />
                             </div>
                             <div className="inputBox">
                                 <label htmlFor="text">Numéro</label>
-                                <input onChange={handleChange} value={numero}   type="number" step="any"  id="numero"  />
+                                <input onChange={handleChange} value={numero}   type="number" step="any"  id="numero" required  />
                             </div>
 
                             <div className="inputBox">
                                 <label htmlFor="text">Télphone</label>
-                                <input onChange={handleChange} value={telephone}  type="tel" id="telephone" />
+                                <input onChange={handleChange} value={telephone}  type="tel" id="telephone" required />
                             </div>
 
                             <button type='submit'>{isUpdate?"confirmez":"validez"}</button>

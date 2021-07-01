@@ -4,6 +4,10 @@ import Adress from '../Adress'
 import ModalConfirm from '../ModalConfirm'
 import { v4 as uuidv4 } from 'uuid'
 import dateformat from 'dateformat'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
+
 const Commandes = props => {
  const [openModal, setOpenModal] = useState(false)
 
@@ -13,7 +17,7 @@ const Commandes = props => {
  const [track, setTrack] = useState(false)
  const [unikId, setUnikId] = useState(uuidv4())
  const [isUpdate, setIsUpdate] = useState('')
-
+ console.log('this is the id and service', id, service)
  useEffect(() => {
   setCurrentUser(firebase.auth.currentUser)
  }, [id])
@@ -67,7 +71,9 @@ const Commandes = props => {
 
      firebase.db
       .collection('Demmande_sur_place')
-      .add({
+      .doc(unikId)
+      .set({
+       uuid: unikId,
        dateArriver: dateArriver,
        exigences: exigences,
        idEmployeMenage: id,
@@ -101,8 +107,25 @@ const Commandes = props => {
        fraisComission: Math.ceil(parseInt(doc.data().salaire, 10) / 10),
        idEmployeMenage: id,
        date: dateformat(new Date()),
+       isValid: false,
       })
-      .then(doc => valide(id, 'employesMenages'))
+      .then(doc => {
+       toast.success(
+        'Bravooo !!! vous avec commandé votre employé de menage. rester en ligne nous allons vous lamener chez vous dans le délai',
+        {
+         position: 'top-center',
+         autoClose: 10000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+        }
+       )
+
+       valide(id, 'employesMenages')
+       props.history.push('/welcome')
+      })
       .catch(error => console.log('error acure', error.message))
     })
   }
@@ -162,7 +185,7 @@ const Commandes = props => {
     </div>
    )}
    {track && (
-    <Adress id={unikId} champ="Commandes" isUpdate={currentUser.uid} />
+    <Adress idChamp={unikId} champ="Commandes" isUpdate={currentUser.uid} />
    )}
 
    {/* -- modal pop up  */}

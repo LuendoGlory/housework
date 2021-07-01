@@ -9,6 +9,7 @@ const Signup = (props) => {
 
     const myDataUser={
         prenom: "",
+        nom: "",
         email: "",
         password:"",
         confirmPassword: "",
@@ -27,13 +28,14 @@ const Signup = (props) => {
 
     const handaleSubmit = e =>{
         e.preventDefault()
-        const { email, password, prenom, role } = dataUser;
+        const { email, password, prenom, role, nom } = dataUser;
         firebase.signupUser(email, password)
         .then(authUser=>{
             setUnikId(authUser.user.uid)
              return firebase.user(authUser.user.uid).set({
                
                 prenom,
+                nom,
                 email,
                 role,
                 adresse:""
@@ -51,9 +53,9 @@ const Signup = (props) => {
         })
     }
 
-    const { prenom, email, password, confirmPassword} = dataUser;
+    const { prenom, nom, email, password, confirmPassword} = dataUser;
 
-const btn = prenom === '' || email === '' || password === '' || password !== confirmPassword ?
+const btn = prenom === '' || nom ===''|| email === '' || password === '' || password !== confirmPassword ?
 <button disabled>ENREGISTRER</button> : <button>ENREGISTRER</button>
 //Gestion des erreurs
 const errorMessage = error !== '' && <span> {error.message} </span>
@@ -73,6 +75,10 @@ const errorMessage = error !== '' && <span> {error.message} </span>
                             <div className="inputBox">
                                 <label htmlFor="prenom">Prénom</label>
                                 <input onChange={handleChange} value={prenom} type="text" id="prenom" required />
+                            </div>
+                            <div className="inputBox">
+                                <label htmlFor="prenom">Nom</label>
+                                <input onChange={handleChange} value={nom} type="text" id="nom" required />
                             </div>
 
                             <div className="inputBox">
@@ -99,7 +105,7 @@ const errorMessage = error !== '' && <span> {error.message} </span>
 
                </div>
             </div>}
-            {track && <Adress id={unikId} champ="users"/>}
+            {track && <Adress idChamp={unikId} champ="users"/>}
 
         
         </>

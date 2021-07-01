@@ -657,6 +657,18 @@ button[disabled]:hover {
 /*-----------------------partie modal --------------------------------*/
 
 
+.modalBackground1 {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .modalBackground {
   position: fixed;
   z-index: 1;
@@ -664,7 +676,7 @@ button[disabled]:hover {
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -676,6 +688,14 @@ button[disabled]:hover {
   display: flex;
   flex-direction: column;
 }
+.modalContainer1 {
+  flex: 0 1 70%;
+  box-shadow: 0 5px 8px 0 rgba(251, 250, 250, 0.808), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  display: flex;
+  background-color: white !important;
+  flex-direction: column;
+}
+
 .modalHeader {
   background-color: var(--dark-red-color);
   padding: 15px;

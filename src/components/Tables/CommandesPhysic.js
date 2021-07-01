@@ -2,12 +2,12 @@ import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Details from '../Modal/Details'
 import { FirebaseContext } from '../Firebase'
-
-const Tables = () => {
+const PhysicTable = () => {
  const firebase = useContext(FirebaseContext)
  const [commandes, setCommandes] = useState([])
  const [singleCommande, setSingleCommande] = useState(null)
  const [close, setClose] = useState(true)
+ const [openModal, setOpenModal] = useState(false)
 
  useEffect(() => {
   console.log('entre de dans')
@@ -15,7 +15,7 @@ const Tables = () => {
   let container = []
   if (firebase) {
    firebase.db
-    .collection('Commandes')
+    .collection('Demmande_sur_place')
     .get()
     .then(querySnapshot => {
      querySnapshot.forEach(doc => {
@@ -42,12 +42,13 @@ const Tables = () => {
 
       // CHECK NOW FOR THE USERS
       firebase.db
-       .collection('users')
-       .doc(`${container[i].idUser}`)
+       .collection('clientsPysique')
+       .doc(`${container[i].idClient_sur_place}`)
        .get()
        .then(query => {
         //console.log('first this is the user object', query.data().adresse)
         //  container.push()
+        console.log('data user', query.data())
         container[i].user = query.data()
         firebase.db
          .collection('adresse')
@@ -69,9 +70,7 @@ const Tables = () => {
     .catch(err => console.log(err.message))
   }
  }, [])
-
  //  commandes && console.log('commandes out here', commandes)
- const [openModal, setOpenModal] = useState(false)
 
  const showModal = uuid => {
   setSingleCommande(commandes.find(com => com.uuid == uuid))
@@ -96,7 +95,6 @@ const Tables = () => {
    })
    .catch(err => console.log(err.message))
  }
-
  const valider = uuid => {
   firebase.db
    .collection('Commandes')
@@ -117,6 +115,7 @@ const Tables = () => {
    })
    .catch(err => console.log(err.message))
  }
+
  return (
   <Fragment>
    <div className=""></div>
@@ -208,5 +207,4 @@ const Tables = () => {
   </Fragment>
  )
 }
-
-export default Tables
+export default PhysicTable

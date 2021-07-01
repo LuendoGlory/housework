@@ -47,7 +47,7 @@ const [openModal, setOpenModal] = useState(false)
 
             <Modal showModal={openModal} closeModal={closeModal}>
                 <div className="modalHeader">
-                    <h2>{nom}, {prenom}</h2>
+                    <h2>{nom+` `+prenom }</h2>
                 </div>
 
                 <div className="modalBody">
