@@ -10,7 +10,7 @@ const PhysicTable = () => {
  const [openModal, setOpenModal] = useState(false)
 
  useEffect(() => {
-  console.log('entre de dans')
+  //.log('entre de dans')
 
   let container = []
   if (firebase) {
@@ -24,12 +24,12 @@ const PhysicTable = () => {
 
       // const brush  ={...doc.id,...doc.data()}
       container.push(doc.data())
-      //  console.log('document container', ' => ', container)
+      //  //.log('document container', ' => ', container)
      })
     })
     .then(() => {
      for (let i = 0; i < container.length; i++) {
-      console.log(container[i].idEmployeMenage)
+      //.log(container[i].idEmployeMenage)
       firebase.db
        .collection('employesMenages')
        .doc(`${container[i].idEmployeMenage}`)
@@ -48,7 +48,7 @@ const PhysicTable = () => {
        .then(query => {
         //console.log('first this is the user object', query.data().adresse)
         //  container.push()
-        console.log('data user', query.data())
+        // console.log('data user', query.data())
         container[i].user = query.data()
         firebase.db
          .collection('adresse')
@@ -69,14 +69,14 @@ const PhysicTable = () => {
     })
     .catch(err => console.log(err.message))
   }
- }, [])
+ })
  //  commandes && console.log('commandes out here', commandes)
 
  const showModal = uuid => {
   setSingleCommande(commandes.find(com => com.uuid == uuid))
   let c = commandes.find(com => com.uuid == uuid)
   setSingleCommande(c)
-  console.log('new single commande there', c)
+  //.log('new single commande there', c)
 
   setOpenModal(true)
  }
@@ -85,19 +85,19 @@ const PhysicTable = () => {
   setOpenModal(false)
  }
  const deleteCommande = uuid => {
-  console.log('this is uuid', uuid)
+  //.log('this is uuid', uuid)
   firebase.db
-   .collection('Commandes')
+   .collection('Demmande_sur_place')
    .doc(`${uuid}`)
    .delete()
    .then(() => {
-    console.log('succefuly deleted')
+    //.log('succefuly deleted')
    })
    .catch(err => console.log(err.message))
  }
  const valider = uuid => {
   firebase.db
-   .collection('Commandes')
+   .collection('Demmande_sur_place')
    .doc(`${uuid}`)
    .update({ isValid: true })
    .then(() => {
@@ -107,7 +107,7 @@ const PhysicTable = () => {
  }
  const invalider = uuid => {
   firebase.db
-   .collection('Commandes')
+   .collection('Demmande_sur_place')
    .doc(`${uuid}`)
    .update({ isValid: false })
    .then(() => {
@@ -153,7 +153,7 @@ const PhysicTable = () => {
         employe,
        } = com
        // console.log("single one",uuid,user,date,dateArriver,adresse,fraisComission,employe);
-       console.log('single one com', com)
+       //.log('single one com', com)
        return (
         <tr>
          <td>{uuid}</td>
@@ -201,7 +201,12 @@ const PhysicTable = () => {
    {
     //  console.log("sing",singleCommande)
     singleCommande && (
-     <Details close={close} setClose={setClose} detail={singleCommande} />
+     <Details
+      close={close}
+      setClose={setClose}
+      detail={singleCommande}
+      physic={true}
+     />
     )
    }
   </Fragment>

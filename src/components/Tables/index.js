@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Details from '../Modal/Details'
 import { FirebaseContext } from '../Firebase'
+import CommandesPhysic from './CommandesPhysic'
+import EmployesTables from './EmployesTables'
 
 const Tables = () => {
  const firebase = useContext(FirebaseContext)
@@ -68,7 +70,7 @@ const Tables = () => {
     })
     .catch(err => console.log(err.message))
   }
- }, [])
+ })
 
  //  commandes && console.log('commandes out here', commandes)
  const [openModal, setOpenModal] = useState(false)
@@ -119,92 +121,98 @@ const Tables = () => {
  }
  return (
   <Fragment>
-   <div className=""></div>
+   <div className="container">
+    <h3>Commandes normale</h3>
+    <table className="tableau_style">
+     <thead>
+      <tr>
+       <th>Id_Commande</th>
+       <th>Date</th>
+       <th>Présentation</th>
+       <th>Comission</th>
+       <th>valide</th>
+       <th>Détails</th>
+       <th>Valider/Invalider</th>
+       <th>Delete</th>
+      </tr>
+     </thead>
 
-   <table className="tableau_style">
-    <thead>
-     <tr>
-      <th>Id_Commande</th>
-      <th>Date</th>
-      <th>Présentation</th>
-      <th>Comission</th>
-      <th>valide</th>
-      <th>Détails</th>
-      <th>Valider/Invalider</th>
-      <th>Delete</th>
-     </tr>
-    </thead>
+     <tbody>
+      {commandes &&
+       commandes.map(com => {
+        // const {adresse}=detail
+        // const {user}=detail
+        // const {telephone,commune,zone,quartier,avenue,numero}=adresse
+        // const {nom,prenom}=user
 
-    <tbody>
-     {commandes &&
-      commandes.map(com => {
-       // const {adresse}=detail
-       // const {user}=detail
-       // const {telephone,commune,zone,quartier,avenue,numero}=adresse
-       // const {nom,prenom}=user
-
-       const {
-        uuid,
-        user,
-        date,
-        dateArriver,
-        adresse,
-        fraisComission,
-        isValid,
-        employe,
-       } = com
-       // console.log("single one",uuid,user,date,dateArriver,adresse,fraisComission,employe);
-       console.log('single one com', com)
-       return (
-        <tr>
-         <td>{uuid}</td>
-         <td>{date}</td>
-         <td>{dateArriver}</td>
-         <td>{fraisComission}</td>
-         <td style={{ color: isValid ? 'green' : 'red' }}>
-          {isValid ? 'OUI' : 'NON'}
-         </td>
-         <td>
-          <button
-           onClick={() => showModal(com.uuid)}
-           type="button"
-           class="btn btn-outline-info"
-          >
-           Info
-          </button>
-         </td>
-         <td>
-          {isValid ? (
-           <button className="btn btn-success" onClick={() => invalider(uuid)}>
-            invalider
+        const {
+         uuid,
+         user,
+         date,
+         dateArriver,
+         adresse,
+         fraisComission,
+         isValid,
+         employe,
+        } = com
+        // console.log("single one",uuid,user,date,dateArriver,adresse,fraisComission,employe);
+        console.log('single one com', com)
+        return (
+         <tr>
+          <td>{uuid}</td>
+          <td>{date}</td>
+          <td>{dateArriver}</td>
+          <td>{fraisComission}</td>
+          <td style={{ color: isValid ? 'green' : 'red' }}>
+           {isValid ? 'OUI' : 'NON'}
+          </td>
+          <td>
+           <button
+            onClick={() => showModal(com.uuid)}
+            type="button"
+            class="btn btn-outline-info"
+           >
+            Info
            </button>
-          ) : (
-           <button className="btn btn-danger" onClick={() => valider(uuid)}>
-            valider
-           </button>
-          )}
-         </td>
+          </td>
+          <td>
+           {isValid ? (
+            <button className="btn btn-success" onClick={() => invalider(uuid)}>
+             invalider
+            </button>
+           ) : (
+            <button className="btn btn-danger" onClick={() => valider(uuid)}>
+             valider
+            </button>
+           )}
+          </td>
 
-         <td>
-          <button
-           type="button"
-           onClick={() => deleteCommande(uuid)}
-           class="btn btn-danger"
-          >
-           Delete
-          </button>
-         </td>
-        </tr>
-       )
-      })}
-    </tbody>
-   </table>
-   {
-    //  console.log("sing",singleCommande)
-    singleCommande && (
-     <Details close={close} setClose={setClose} detail={singleCommande} />
-    )
-   }
+          <td>
+           <button
+            type="button"
+            onClick={() => deleteCommande(uuid)}
+            class="btn btn-danger"
+           >
+            Delete
+           </button>
+          </td>
+         </tr>
+        )
+       })}
+     </tbody>
+    </table>
+    {
+     //  console.log("sing",singleCommande)
+     singleCommande && (
+      <Details close={close} setClose={setClose} detail={singleCommande} />
+     )
+    }
+    <h3>Commandes physicque</h3>
+
+    <CommandesPhysic />
+    <h3>employes</h3>
+    <EmployesTables />
+   </div>
   </Fragment>
  )
 }

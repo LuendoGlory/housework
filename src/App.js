@@ -20,8 +20,9 @@ import Tables from './components/Tables'
 //import ClientsPhysique from './components/ClientsPhysique';
 import ErrorPage from './components/ErrorPage'
 
-import CommandesPhysic from './components/Tables/CommandesPhysic'
+// import CommandesPhysic from './components/Tables/CommandesPhysic'
 
+// import EmployesTable from './components/Tables/EmployesTables'
 import './App.css'
 import Pages from './components/pages'
 import ServiceChoice from './components/ServicesChoise'
@@ -56,7 +57,6 @@ function App() {
      <Route path="*" component={ErrorPage} />
     </Switch>
     <Footer />
-    <CommandesPhysic />
    </Router>
   </>
  )
