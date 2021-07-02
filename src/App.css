@@ -897,7 +897,19 @@ tbody tr td button{
 
 /* ------------------------------------FinCSS blc TABLEDATAS---------------------------------  */
 
-/* ------------------------------------FinCSS blc SEARCH---------------------------------  */
+/* ------------------------------------CSS COMPOSANT UTILISATION---------------------------------  */
+
+
+
+.wrapper .tilisation{
+  color: rgb(40, 44, 52);
+  margin-bottom: 0px;
+  margin-top: calc(40px + var(--banner-height-normal));
+  font-size: 60px;
+  line-height: 65px;
+  font-weight: 700;
+}
+/* -----------------------------------FIN COMPOSANT UTILISATION---------------------------------  */
 
 
 .boxSearch{
