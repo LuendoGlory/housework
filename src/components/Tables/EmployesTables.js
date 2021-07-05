@@ -5,6 +5,8 @@ import { FirebaseContext } from '../Firebase'
 const EmployesTables = () => {
  const firebase = useContext(FirebaseContext)
  const [employees, setEmployees] = useState([])
+ const [adresse, setAdresse] = useState(null)
+
  const [singleCommande, setSingleCommande] = useState(null)
  const [close, setClose] = useState(true)
  const [openModal, setOpenModal] = useState(false)
@@ -16,8 +18,9 @@ const EmployesTables = () => {
     .get()
     .then(querySnapshot => {
      querySnapshot.forEach(doc => {
-      console.log('this is employees tables', doc.data())
-      //  setEmployees(doc.data())
+      // console.log('this is employees tables', doc.data())
+      // setEmployees(doc.data())
+
       container.push(doc.data())
      })
      setEmployees(container)
@@ -61,7 +64,7 @@ const EmployesTables = () => {
     <tbody>
      {employees &&
       employees.map(empl => {
-       console.log('single empl', empl)
+       //  console.log('single empl', empl)
 
        const {
         adresse,

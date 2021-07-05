@@ -17,7 +17,7 @@ const Commandes = props => {
  const [track, setTrack] = useState(false)
  const [unikId, setUnikId] = useState(uuidv4())
  const [isUpdate, setIsUpdate] = useState('')
- console.log('this is the id and service', id, service)
+ //  console.log('this is the id and service', id, service)
  useEffect(() => {
   setCurrentUser(firebase.auth.currentUser)
  }, [id])
@@ -67,7 +67,7 @@ const Commandes = props => {
     .doc(`${id}`)
     .get()
     .then(doc => {
-     console.log('this is the employesMenage', doc.data())
+     //  console.log('this is the employesMenage', doc.data())
 
      firebase.db
       .collection('Demmande_sur_place')
@@ -84,7 +84,7 @@ const Commandes = props => {
       .then(doc => {
        valide(id, 'employesMenages')
        localStorage.removeItem('client')
-       console.log('commande physic ajouter', doc.doc)
+       //  console.log('commande physic ajouter', doc.doc)
       })
       .catch(err => console.log('error qcure', err.message))
     })
@@ -94,7 +94,7 @@ const Commandes = props => {
     .doc(`${id}`)
     .get()
     .then(doc => {
-     console.log('this is the employesMenage', doc.data())
+     //  console.log('this is the employesMenage', doc.data())
 
      firebase.db
       .collection('Commandes')
