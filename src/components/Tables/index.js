@@ -38,9 +38,7 @@ const Tables = () => {
        .doc(`${container[i].idEmployeMenage}`)
        .get()
        .then(query => {
-        console.log('this is the employesMenages object', query.data())
-        //  container.push()
-        container[i].employe = query.data()
+        //container.push()
         let taker = JSON.stringify(query.data())
         setEmploye(taker)
         return localStorage.setItem('employe', taker)
@@ -62,7 +60,6 @@ const Tables = () => {
          .doc(`${query.data().adresse}`)
          .get()
          .then(doc => {
-          console.log('ths is the address got from Tables', doc.data())
           localStorage.setItem('adresse', doc.data())
 
           container[i].adresse = doc.data()
@@ -92,6 +89,7 @@ const Tables = () => {
   setSingleCommande(
    c?.idClient_sur_place ? { ...c, idUser: c.idClient_sur_place } : c
   )
+  // setSingleCommande(c)
 
   setOpenModal(true)
  }
