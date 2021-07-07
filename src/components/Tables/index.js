@@ -89,7 +89,9 @@ const Tables = () => {
   setSingleCommande(commandes.find(com => com.uuid == uuid))
   let c = commandes.find(com => com.uuid == uuid)
 
-  setSingleCommande(c)
+  setSingleCommande(
+   c?.idClient_sur_place ? { ...c, idUser: c.idClient_sur_place } : c
+  )
 
   setOpenModal(true)
  }

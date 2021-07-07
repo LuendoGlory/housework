@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from 'react'
 
 const Details = ({ detail, close, setClose }) => {
- console.log('this close', close)
- //  console.log(
- //   'details from Details components',
- //   JSON.parse(JSON.stringify(detail))
- //  )
- //  const [shutOut, setshutOut] = useState(true)
- console.log('details from Details components not stringfy', detail)
+ console.log('the detail out here Detail line 4', detail)
+
  //  const theOne = { ...detail }
 
- const { user, employe, adresse } = detail
+ const {
+  uuid,
+  idUser,
+  idEmployeMenage,
+  exigences,
+  date,
+  dateArriver,
+  fraisComission,
+  user,
+  employe,
+  adresse,
+ } = detail
 
- console.log('this is adresse', adresse)
- console.log('this is user', user)
- console.log('this is employe', employe)
- //  const { telephone, commune, zone, quartier, avenue, numero } = adresse
- //  const { nom, prenom } = user
- //  console.log(
- //   'details from Details qdresse components',
- //   telephone,
- //   commune,
- //   zone,
- //   quartier,
- //   avenue,
- //   numero
- //  )
- const { uuid, exigences, date, dateArriver, fraisComission } = detail
- // style={{display:close}}
  return (
   <div className="modalBackground1" style={{ display: close }}>
    <div className="modalContainer1">
