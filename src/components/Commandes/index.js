@@ -95,7 +95,7 @@ const Commandes = props => {
     .get()
     .then(doc => {
      //  console.log('this is the employesMenage', doc.data())
-
+     valide(id, 'employesMenages') 
      firebase.db
       .collection('Commandes')
       .doc(`${unikId}`)
@@ -185,7 +185,7 @@ const Commandes = props => {
     </div>
    )}
    {track && (
-    <Adress idChamp={unikId} champ="Commandes" isUpdate={currentUser.uid} />
+    <Adress idChamp={unikId} champ="Commandes" isUpdate={currentUser.uid} setTrack={setTrack} />
    )}
 
    {/* -- modal pop up  */}

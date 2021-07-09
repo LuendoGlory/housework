@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure();
 
-const Adress = ({idChamp,champ,isUpdate}) => {
+const Adress = ({idChamp,champ,isUpdate,setTrack}) => {
     console.log("id passez",isUpdate);
     console.log("id passez",idChamp);
 const history=useHistory()
@@ -55,16 +55,7 @@ const {
     telephone
 }=datas
 if(isUpdate){
-    console.log("tunaingiya mu update");
-    console.log("data from ", { 
-        id,
-        commune,
-        zone,
-        quartier,
-        avenue,
-        numero,
-        telephone
-    });
+    
     firebase.db.collection('adresse').doc(id).set({
         commune,
         zone,
@@ -73,7 +64,21 @@ if(isUpdate){
         numero,
         telephone
            
-       }).then(doc => console.log("successfully updated")).catch(err=>console.log(err.message))
+       }).then(doc => {
+        setTrack(false)
+        toast.success(
+            'Mise à jour de l\'adresse avec succes veille confirmer votre commande',
+            {
+             position: 'top-center',
+             autoClose: 10000,
+             hideProgressBar: false,
+             closeOnClick: true,
+             pauseOnHover: true,
+             draggable: true,
+             progress: undefined,
+            }
+           )
+           console.log("successfully updated")}).catch(err=>console.log(err.message))
 }else{
 
 
