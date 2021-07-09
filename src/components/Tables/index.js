@@ -8,12 +8,14 @@ import EmployesTables from './EmployesTables'
 const Tables = () => {
  const firebase = useContext(FirebaseContext)
  const [commandes, setCommandes] = useState([])
+ const [adresse, setAdresse] = useState(null)
+ const [user, setUser] = useState(null)
+ const [employe, setEmploye] = useState(null)
+
  const [singleCommande, setSingleCommande] = useState(null)
  const [close, setClose] = useState(true)
 
  useEffect(() => {
-  console.log('entre de dans')
-
   let container = []
   if (firebase) {
    firebase.db
@@ -23,7 +25,6 @@ const Tables = () => {
      querySnapshot.forEach(doc => {
       // doc.data() is never undefined for query doc snapshots
       //  container.push(doc.id)
-
       // const brush  ={...doc.id,...doc.data()}
       container.push(doc.data())
       //  console.log('document container', ' => ', container)
@@ -31,15 +32,16 @@ const Tables = () => {
     })
     .then(() => {
      for (let i = 0; i < container.length; i++) {
-      console.log(container[i].idEmployeMenage)
+      // console.log(container[i].idEmployeMenage)
       firebase.db
        .collection('employesMenages')
        .doc(`${container[i].idEmployeMenage}`)
        .get()
        .then(query => {
-        //  console.log('first this is the employesMenages object', query.data().nom)
-        //  container.push()
-        container[i].employe = query.data()
+        //container.push()
+        let taker = JSON.stringify(query.data())
+        setEmploye(taker)
+        return localStorage.setItem('employe', taker)
        })
 
       // CHECK NOW FOR THE USERS
@@ -48,16 +50,21 @@ const Tables = () => {
        .doc(`${container[i].idUser}`)
        .get()
        .then(query => {
-        //console.log('first this is the user object', query.data().adresse)
+        console.log('first this is the user object', query.data())
         //  container.push()
+        localStorage.setItem('userFrom', query.data())
+        setUser(query.data())
         container[i].user = query.data()
         firebase.db
          .collection('adresse')
          .doc(`${query.data().adresse}`)
          .get()
          .then(doc => {
-          //  console.log("ths is the address got",doc.data().commune);
+          localStorage.setItem('adresse', doc.data())
+
           container[i].adresse = doc.data()
+          setAdresse(query.data())
+          // console.log('then addresse', adresse)
          })
        })
       //  console.log('second this is the container[i].nom', container[i])
@@ -70,7 +77,7 @@ const Tables = () => {
     })
     .catch(err => console.log(err.message))
   }
- })
+ }, [firebase])
 
  //  commandes && console.log('commandes out here', commandes)
  const [openModal, setOpenModal] = useState(false)
@@ -78,8 +85,11 @@ const Tables = () => {
  const showModal = uuid => {
   setSingleCommande(commandes.find(com => com.uuid == uuid))
   let c = commandes.find(com => com.uuid == uuid)
-  setSingleCommande(c)
-  console.log('new single commande there', c)
+
+  setSingleCommande(
+   c?.idClient_sur_place ? { ...c, idUser: c.idClient_sur_place } : c
+  )
+  // setSingleCommande(c)
 
   setOpenModal(true)
  }
@@ -88,7 +98,7 @@ const Tables = () => {
   setOpenModal(false)
  }
  const deleteCommande = uuid => {
-  console.log('this is uuid', uuid)
+  // console.log('this is uuid', uuid)
   firebase.db
    .collection('Commandes')
    .doc(`${uuid}`)
@@ -156,7 +166,7 @@ const Tables = () => {
          employe,
         } = com
         // console.log("single one",uuid,user,date,dateArriver,adresse,fraisComission,employe);
-        console.log('single one com', com)
+        // console.log('single one com', com)
         return (
          <tr>
           <td>{uuid}</td>
@@ -204,7 +214,14 @@ const Tables = () => {
     {
      //  console.log("sing",singleCommande)
      singleCommande && (
-      <Details close={close} setClose={setClose} detail={singleCommande} />
+      <Details
+       close={close}
+       setClose={setClose}
+       detail={singleCommande}
+       adresse={adresse}
+       user={user}
+       employe={employe}
+      />
      )
     }
     <h3>DEMANDES SUR PLACE</h3>

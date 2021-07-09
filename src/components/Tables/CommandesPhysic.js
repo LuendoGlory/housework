@@ -5,8 +5,10 @@ import { FirebaseContext } from '../Firebase'
 const PhysicTable = () => {
  const firebase = useContext(FirebaseContext)
  const [commandes, setCommandes] = useState([])
+ const [adresse, setAdresse] = useState(null)
  const [singleCommande, setSingleCommande] = useState(null)
  const [close, setClose] = useState(true)
+
  const [openModal, setOpenModal] = useState(false)
 
  useEffect(() => {
@@ -21,7 +23,6 @@ const PhysicTable = () => {
      querySnapshot.forEach(doc => {
       // doc.data() is never undefined for query doc snapshots
       //  container.push(doc.id)
-
       // const brush  ={...doc.id,...doc.data()}
       container.push(doc.data())
       //  //.log('document container', ' => ', container)
@@ -75,9 +76,16 @@ const PhysicTable = () => {
  const showModal = uuid => {
   setSingleCommande(commandes.find(com => com.uuid == uuid))
   let c = commandes.find(com => com.uuid == uuid)
+  console.log('single commande clicked', c)
   setSingleCommande(c)
+  firebase.db
+   .collection('adresse')
+   .doc(`${c.adresse}`)
+   .get()
+   .then(doc => {
+    setAdresse(doc.data())
+   })
   //.log('new single commande there', c)
-
   setOpenModal(true)
  }
 
@@ -203,9 +211,9 @@ const PhysicTable = () => {
     singleCommande && (
      <Details
       close={close}
-      setClose={setClose}
+      setClose={setOpenModal}e
       detail={singleCommande}
-      physic={true}
+      adresse={adresse}
      />
     )
    }
