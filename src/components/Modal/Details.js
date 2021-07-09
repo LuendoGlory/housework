@@ -7,7 +7,7 @@ const Details = ({ detail, close, setClose }) => {
  const { telephone, commune, zone, quartier, avenue, numero } = adresse
  const { nom, prenom } = user
  console.log(
-  'details from Details qdresse components',
+  'details from Details adresse components',
   telephone,
   commune,
   zone,

@@ -122,7 +122,7 @@ const Tables = () => {
  return (
   <Fragment>
    <div className="container">
-    <h3>Commandes normale</h3>
+    <h3>COMMANDES DES EMPLOYES EN LIGNE</h3>
     <table className="tableau_style">
      <thead>
       <tr>
@@ -207,10 +207,10 @@ const Tables = () => {
       <Details close={close} setClose={setClose} detail={singleCommande} />
      )
     }
-    <h3>Commandes physicque</h3>
+    <h3>DEMANDES SUR PLACE</h3>
 
     <CommandesPhysic />
-    <h3>employes</h3>
+    <h3>EMPLOYES DE MENAGE HOUSEWORK</h3>
     <EmployesTables />
    </div>
   </Fragment>
